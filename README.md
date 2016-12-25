@@ -1,45 +1,7 @@
-# INF01120 - Laboratório Sistema de Softwares
-Repositório para o trabalho final da disciplina
+# FIFA Player Stats Data Visualization
 
-**Sobre**
+**About**
 
-O software que o grupo desenvolverá será um Gerenciador de Tarefas para analisar e melhorar o desempenho de funcionários da empresa MHAAS. A ideia é utilizar o sistema para ter um controle maior de como o tempo dos funcionários é utilizado em tarefas cotidianas. 
+Personal project developed using web technologies to analysis data extracted from player created in FIFA 15's game.
 
-Essa informação será usada posteriormente para extrair o tempo destinadado em uma tarefa e estabelecer um preço mais justo ao cliente na cobrança do serviço, evitando que um dos dois lados saia perdendo. 
-
-Além disso, o sistema contará com outras funcionalidades para aumentar o nível de organização do grupo de desenvolvedores, facilitando a comunicação e tornando o trabalho em equipe mais sistemático, corroborando para a ideia inicial de mensurar a eficiência das tarefas atribuídas. 
-
-**Cliente**
-
-- MHAAS - Inteligência em Desenvolvimento
-- http://mhaas.com.br/
-
-**Principais Funcionalidades**
-
-- Páginas Web dinâmicas
-- Sistema de Cadastro/Login
-- Gestão de Tarefas
-- Gestão de Equipes
-- Gestão de Projetos
-- Sistema de Lembretes
-- Time Tracker
-- Indicadores de Performance [tarefas: total, completas, atrasadas]
-- Notificações por E-mail [todas | filtrar ]
-- Relatórios [baseado nos indicadores]
-- Agenda
-- Badges
-
-**Tecnologias**
-- Aplicação Web
-- Desenvolvimento responsivo [Mobile, Tablet, Desktop]
-- PHP
-- Javascript/jQuery/AJAX
-- HTML
-- CSS
-- MYSQL
-
-**Processo de desenvolvimento**
-- Métodos Ágeis
-- SCRUM
-- Controle de versionamento de código com GitHub
-- Gerenciamento de Backlog, sprints e tasks em gerais com Trello [ https://trello.com/b/TqDlZ7pD/labsw ]
+My goal here is to discover patterns in the collected data and explore it using the best data visualization tecniques in order increase the user experience when they access the project.
