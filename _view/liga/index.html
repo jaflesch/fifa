@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+
+{% set page_title = 'FIFA 15 Stats - Home' %}
+
+{% block main %}
+	<div class="container mgt30 pdt15" style="background: #fff;">
+		<div class="row">
+			<div class="col-md-12">
+				<h3 class="mgt60"> Partidas </h3>
+				<table class="table table-striped">
+				<thead>
+					<tr>
+						<td> Adversário </td>
+						<td class="text-center"> Campeonato </td>
+						<td class="text-center"> Resultado </td>
+						<td class="text-center"> Gols </td>
+						<td class="text-center"> Assistências </td>
+						<td class="text-center"> CA </td>
+						<td class="text-center"> CV </td>
+						<td class="text-center"> Lesões </td>
+					</tr>
+				</thead>
+				<tbody>
+					{% for partida in dados.partidas %}
+						<tr>
+							<td> {{ partida.time }}</td>
+							<td class="text-center"> {{ partida.campeonato }}</td>
+							<td class="text-center"> {{ partida.resultado }}</td>
+							<td class="text-center"> {{ partida.gol }}</td>
+							<td class="text-center"> {{ partida.assistencia }}</td>
+							<td class="text-center"> {{ partida.cartao_amarelo|raw }}</td>
+							<td class="text-center"> {{ partida.cartao_vermelho|raw }}</td>
+							<td class="text-center"> {{ partida.lesao|raw }}</td>
+						</tr>
+					{% endfor %}					
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+{% endblock %}
+
+{% block styles %}
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}

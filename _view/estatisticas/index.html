@@ -1,0 +1,121 @@
+{% extends "layout.html" %}
+
+{% set page_title = 'FIFA 15 Stats - Home' %}
+
+{% block main %}
+	<div class="container mgt30 pdt15" style="background: #fff;">
+		<div class="row">
+			<div class="col-md-12">
+				<h1 class="section text-center"> Jogador </h1>	
+				<p><strong>Hat-Tricks: </strong> {{ player.hattrick }}</p>
+				<p><strong>Poker: </strong> {{ player.poker }}</p>
+				<p><strong>Repoker: </strong> {{ player.repoker }}</p>
+
+				<p><strong>Maior seca de gols: </strong> {{ player.seca }} partidas </p>
+
+				<br/>
+				<p><strong>Total de gols: </strong> {{ total.gol }} gols </p>
+				<p><strong>Total de assistências: </strong> {{ total.assistencia }} assistências </p>
+				<p><strong>Total de partidas: </strong> {{ total.partidas }} partidas </p>
+				<p><strong>Média de gols: </strong> {{ total.media_gol }} gols / jogo </p>
+				<p><strong>Média de assistências: </strong> {{ total.media_assistencia }} assistências / jogo</p>
+				<p><strong>Idade: </strong> {{ player.idade }} anos </p>
+				<br/>
+
+				<p><strong> {{ total.dentro_area }} </strong> gols de dentro da área </p>
+				<p><strong> {{ total.fora_area }} </strong> gols de fora da área </p>
+
+				<hr/>
+
+				<p><strong> {{ total.perna_esquerda }} </strong> gols com a perna esquerda </p>
+				<p><strong> {{ total.perna_direita }} </strong> gols com a perna direita </p>
+
+				<hr/>
+				<p><strong> {{ total.penalti }} </strong> gols de pênalti </p>
+				<p><strong> {{ total.falta }} </strong> gols de falta </p>
+
+				<hr/>
+				<p><strong> {{ total.cabeca }} </strong> gols de cabeça </p>
+				<p><strong> {{ total.voleio }} </strong> gols de voleio </p>
+				<p><strong> {{ total.cobertura }} </strong> gols de cobertura </p>
+
+				<hr/>
+				<p><strong> {{ total.liga }} </strong> gols na Liga BBVA </p>
+				<p><strong> {{ total.copa }} </strong> gols na Copa do Rei </p>
+				<p><strong> {{ total.ucl }} </strong> gols na UEFA Champions League </p>
+				<p><strong> {{ total.sces }} </strong> gols na Supercopa da Espanha </p>
+				<p><strong> {{ total.sceu }} </strong> gols na Supercopa da Europa </p>
+				<p><strong> {{ total.a }} </strong> gols em amistosos </p>
+				<p><strong> {{ total.clube }} </strong> gols pelo Real Madrid </p>
+				<p><strong> {{ total.selecao }} </strong> gols pela seleção brasileira </p>
+
+				<br/>
+				{% for key, value in player.gol %}
+				{% if value.result %}
+						<p><strong>Gol {{ key }} </strong> na partida {{ value.partida }} contra {{ value.time }}</p>
+					{% endif %}
+				{% endfor %}
+
+				<hr>
+
+				{% for msg in curiosidades %}
+				<p> {{ msg }}</p>
+				{% endfor %}
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<h1 class="text-center section"> Gol contra Times </h1>
+				<table class="table table-striped text-center table-team-gols">
+					<thead>
+						<tr>
+							<td><i class="text-primary fa fa-shield fa-3x"></i></td>
+							<td><i class="text-primary fa fa-soccer-ball-o fa-3x"></i> </td>
+							<td><i class="text-primary fa fa-user fa-3x"> </td>
+						</tr>
+					</thead>
+					<tbody>
+						{% for registro in times %}
+						<tr>
+							<td><img src="{{ root }}/assets/img/teams/{{ registro.imagem }}.png" class="img-responsive center-block"> </td>
+							<td> {{ registro.gol }} </td>
+							<td> {{ registro.partidas }} </td>
+						</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+
+				<br>
+				<hr />
+				<br>
+
+				<h1 class="text-center section"> Seleções </h1>
+				<table class="table table-striped text-center table-team-gols">
+					<thead>
+						<tr>
+							<td><i class="text-primary fa fa-shield fa-3x"></i></td>
+							<td><i class="text-primary fa fa-soccer-ball-o fa-3x"></i> </td>
+							<td><i class="text-primary fa fa-user fa-3x"> </td>
+						</tr>
+					</thead>
+					<tbody>
+						{% for registro in selecoes %}
+						<tr>
+							<td><img src="{{ root }}/assets/img/teams/{{ registro.imagem }}.png" class="img-responsive center-block"> </td>
+							<td> {{ registro.gol }} </td>
+							<td> {{ registro.partidas }} </td>
+						</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+
+			</div>
+		</div>
+	</div>
+{% endblock %}
+
+{% block styles %}
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}

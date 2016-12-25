@@ -1,0 +1,148 @@
+{% extends "layout.html" %}
+
+{% set page_title = 'FIFA 15 Stats - Home' %}
+
+{% block main %}
+	<div class="container mgt30 pdt15" style="background: #fff;">
+		<div class="row">
+			<div class="col-md-12">
+				<h1 class="text-center mgb30"> História </h1>
+				<h3> Geral </h3>
+				<table class="table table-striped text-center">
+					<thead>
+						<tr>
+							<td> Gols </td>
+							<td> Assistências </td>
+							<td> CA </td>
+							<td> CV </td>
+							<td> Lesões </td>
+							<td> Sem Gols </td>
+							<td> Sem Participar </td>
+							<td> Vitórias </td>
+							<td> Empates </td>
+							<td> Derrotas </td>
+							<td> Total Jogos </td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td> {{ total.gol }} </td>
+							<td> {{ total.assistencia }} </td>
+							<td> {{ total.yc }} </td>
+							<td> {{ total.rc }} </td>
+							<td> {{ total.lesao }} </td>
+							<td> {{ total.sem_gol }} </td>
+							<td> {{ total.sem_participar }} </td>
+							<td> {{ total.vitoria }} </td>
+							<td> {{ total.empate }} </td>
+							<td> {{ total.derrota }} </td>
+							<td> {{ total.jogos }} </td>
+						</tr>
+					</tbody>
+				</table>
+
+				<h3> Gols </h3>
+				<table class="table table-striped text-center mgb60">
+					<thead>
+						<tr>
+							<td> Dentro Área </td>
+							<td> Fora Área </td>
+							<td> Falta </td>
+							<td> Pênalti </td>
+							<td> Cabeça </td>
+							<td> Cobertura </td>
+							<td> Perna Ruim </td>
+							<td> Voleio </td>
+							<td> Bicicleta </td>							
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td> {{ total.dentro_area }} </td>
+							<td> {{ total.fora_area }} </td>
+							<td> {{ total.falta }} </td>
+							<td> {{ total.penalti }} </td>
+							<td> {{ total.cabeca }} </td>
+							<td> {{ total.cobertura }} </td>
+							<td> {{ total.direita }} </td>
+							<td> {{ total.voleio }} </td>
+							<td> 0 </td>
+						</tr>
+					</tbody>
+				</table>
+
+				<h1 class="text-center mgb30"> {{ dados.partidas[0].ano }} </h1>
+
+				<h3> Total </h3>
+				<table class="table table-striped text-center">
+					<thead>
+						<tr>
+							<td> Gols </td>
+							<td> Assistências </td>
+							<td> CA </td>
+							<td> CV </td>
+							<td> Lesões </td>
+							<td> Sem Gols </td>
+							<td> Sem Participar </td>
+							<td> Vitórias </td>
+							<td> Empates </td>
+							<td> Derrotas </td>
+							<td> Total Jogos </td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td> {{ dados.total.gol }} </td>
+							<td> {{ dados.total.assistencia }} </td>
+							<td> {{ dados.total.yc }} </td>
+							<td> {{ dados.total.rc }} </td>
+							<td> {{ dados.total.lesao }} </td>
+							<td> {{ dados.total.sem_gol }} </td>
+							<td> {{ dados.total.sem_participar }} </td>
+							<td> {{ dados.total.vitoria }} </td>
+							<td> {{ dados.total.empate }} </td>
+							<td> {{ dados.total.derrota }} </td>
+							<td> {{ dados.total.jogos }} </td>
+						</tr>
+					</tbody>
+				</table>
+
+				<h3 class="mgt60"> Partidas </h3>
+				<table class="table table-striped">
+				<thead>
+					<tr>
+						<td> Adversário </td>
+						<td class="text-center"> Campeonato </td>
+						<td class="text-center"> Resultado </td>
+						<td> Gols </td>
+						<td> Assistências </td>
+						<td> CA </td>
+						<td> CV </td>
+						<td> Lesões </td>
+					</tr>
+				</thead>
+				<tbody>
+					{% for partida in dados.partidas %}
+						<tr>
+							<td> {{ partida.time }}</td>
+							<td class="text-center"> {{ partida.campeonato }}</td>
+							<td class="text-center"> {{ partida.resultado }}</td>
+							<td class="text-center"> {{ partida.gol }}</td>
+							<td class="text-center"> {{ partida.assistencia }}</td>
+							<td class="text-center"> {{ partida.cartao_amarelo|raw }}</td>
+							<td class="text-center"> {{ partida.cartao_vermelho|raw }}</td>
+							<td class="text-center"> {{ partida.lesao|raw }}</td>
+						</tr>
+					{% endfor %}					
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+{% endblock %}
+
+{% block styles %}
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}

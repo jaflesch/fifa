@@ -1,0 +1,231 @@
+{% extends "layout.html" %}
+
+{% set page_title = 'FIFA 15 Stats - Home' %}
+
+{% block main %}
+	<div class="container mgt30 pdt15" style="background: #fff;">
+		<div class="row">
+			<div class="col-md-12">
+				<h1 class="text-center section"> Gols & Assistências </h1>
+				<canvas id="GAbyYear" class="center-block" width="700" height="400"></canvas>                
+				<br>
+				<hr />
+				<br>
+                
+                <h1 class="text-center section"> Atuações </h1>
+                <canvas id="teambar" class="center-block" width="780" height="700"></canvas>
+                <br/><br/>
+                <canvas id="teamratio" class="center-block" width="780" height="700"></canvas>
+
+				<h1 class="text-center section"> Gols/Assistências </h1>
+				<table class="table table-striped text-center table-team-gols">
+					<thead>
+						<tr>
+							<td><i class="text-primary fa fa-shield fa-3x"></i></td>
+							<td><i class="text-primary fa fa-soccer-ball-o fa-3x"></i> </td>
+							<td><i class="text-primary fa fa-user fa-3x"> </td>
+						</tr>
+					</thead>
+					<tbody>
+						{% for registro in selecoes %}
+						<tr>
+							<td><img src="{{ root }}/assets/img/teams/{{ registro.imagem }}.png" class="img-responsive center-block"> </td>
+							<td> {{ registro.gol }} </td>
+							<td> {{ registro.partidas }} </td>
+						</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+
+			</div>
+		</div>
+	</div>
+{% endblock %}
+
+{% block styles %}
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript" src="{{ root }}/assets/js/chart.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {         
+        // Doughnut chart
+        var ctx = $("#GAbyYear");
+        var myChart = new Chart(ctx, {
+            type: 'line',
+
+            data: {
+                labels: [{% for ano in participacao.ano %} {{ ano.ano }}, {% endfor %}],
+                datasets: [
+                    {
+                        label: "Gols por Temporada",
+                        fill: true,
+                        lineTension: 0.25,
+                        backgroundColor: "rgba(33,150,243,0.05)",
+                        borderColor: "rgba(33,150,243,1)",
+                        borderCapStyle: 'butt',
+                        borderDash: [],
+                        borderDashOffset: 0.0,
+                        borderJoinStyle: 'miter',
+                        pointBorderColor: "rgba(33,150,243,1)",
+                        pointBackgroundColor: "#fff",
+                        pointBorderWidth: 10,
+                        pointHoverRadius: 5,
+                        pointHoverBackgroundColor: "rgba(33,150,243,1)",
+                        pointHoverBorderColor: "rgba(33,150,243,1)",
+                        pointHoverBorderWidth: 2,
+                        pointRadius: 3,
+                        pointHitRadius: 10,
+                        data: [{% for ano in participacao.ano %} {{ ano.gol }}, {% endfor %}],
+                        spanGaps: false,
+                    },
+                    {
+                        label: "Assistências por Temporada",
+                        fill: true,
+                        lineTension: 0.25,
+                        backgroundColor: "rgba(233,30,99,0.05)",
+                        borderColor: "#f44336",
+                        borderCapStyle: 'butt',
+                        borderDash: [],
+                        borderDashOffset: 0.0,
+                        borderJoinStyle: 'miter',
+                        pointBorderColor: "#f44336",
+                        pointBackgroundColor: "#fff",
+                        pointBorderWidth: 10,
+                        pointHoverRadius: 5,
+                        pointHoverBackgroundColor: "#f44336",
+                        pointHoverBorderColor: "#f44336",
+                        pointHoverBorderWidth: 2,
+                        pointRadius: 3,
+                        pointHitRadius: 10,
+                        data: [{% for ano in participacao.ano %} {{ ano.assistencia }}, {% endfor %}],
+                        spanGaps: false,
+                    },
+                    {
+                        label: "Partidas",
+                        fill: true,
+                        lineTension: 0.25,
+                        backgroundColor: "rgba(0,0,0,0.05)",
+                        borderColor: "#2b2b2b",
+                        borderCapStyle: 'butt',
+                        borderDash: [],
+                        borderDashOffset: 0.0,
+                        borderJoinStyle: 'miter',
+                        pointBorderColor: "#000",
+                        pointBackgroundColor: "#fff",
+                        pointBorderWidth: 10,
+                        pointHoverRadius: 5,
+                        pointHoverBackgroundColor: "#111",
+                        pointHoverBorderColor: "#000",
+                        pointHoverBorderWidth: 2,
+                        pointRadius: 3,
+                        pointHitRadius: 10,
+                        data: [{% for ano in participacao.ano %} {{ ano.partidas }}, {% endfor %}],
+                        spanGaps: false,
+                    }
+                ]
+            },
+            options: {
+                startAngle: 0,
+                responsive: false,
+                elements: {
+                    line: {
+                        lineTension: 20
+                    }
+                },
+                title: {
+                    display: true,
+                    text: 'Desempenho da Equipe'
+                }
+            }
+        });
+
+        var ctx = $("#teamratio");
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: [{% for dados in pontuacao %} {{ dados.ano }}, {% endfor %}],
+                datasets: [
+                    {
+                        label: "Aproveitamento (%) por Temporada",
+                        fill: true,
+                        lineTension: 0.25,
+                        backgroundColor: "rgba(75,192,192,0.1)",
+                        borderColor: "rgba(75,192,192,1)",
+                        borderCapStyle: 'butt',
+                        borderDash: [],
+                        borderDashOffset: 0.0,
+                        borderJoinStyle: 'miter',
+                        pointBorderColor: "rgba(75,192,192,1)",
+                        pointBackgroundColor: "#fff",
+                        pointBorderWidth: 10,
+                        pointHoverRadius: 5,
+                        pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                        pointHoverBorderColor: "rgba(220,220,220,1)",
+                        pointHoverBorderWidth: 2,
+                        pointRadius: 3,
+                        pointHitRadius: 10,
+                        data: [{% for dados in pontuacao %} {{ dados.rendimento }}, {% endfor %}],
+                        spanGaps: false,
+                    }
+                ]
+            },
+            options: {
+                startAngle: 0,
+                responsive: false,
+                elements: {
+                    line: {
+                        lineTension: 20
+                    }
+                },
+                title: {
+                    display: true,
+                    text: 'Desempenho da Equipe'
+                }
+            }
+        });
+
+        var ctx = $("#teambar");
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: [
+                    {% for dados in pontuacao %}
+                        {{ dados.ano }}, {{ dados.ano }}, {{ dados.ano }},
+                    {% endfor %}
+                ],
+                datasets: [
+                    {
+                        label: "Distribuição Resultados",
+                        backgroundColor: [
+                            {% for dados in pontuacao %}
+                            'rgba(76, 175, 80, 1)',
+                            'rgba(176,190,197,1)',
+                            'rgba(244,67,54,1)',
+                            {% endfor %}
+                        ],
+                        data: [
+                            {% for dados in pontuacao %}
+                                {{ dados.V }}, {{ dados.E }}, {{ dados.D }},
+                            {% endfor %}
+                        ]
+                    }
+                ]
+            },
+            options: {
+                startAngle: 0,
+                responsive: false,
+                elements: {
+                    line: {
+                        lineTension: 20
+                    }
+                },
+                title: {
+                    display: true,
+                    text: 'Desempenho da Equipe'
+                }
+            }
+        });
+    });
+</script>
+{% endblock %}

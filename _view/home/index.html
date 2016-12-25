@@ -1,0 +1,182 @@
+{% extends "layout.html" %}
+
+{% set page_title = 'FIFA 15 Stats - Home' %}
+
+{% block main %}
+	<div class="container mgt30 pdt15" style="background: #fff;">
+		<div class="row">
+			<div class="col-md-12">
+				<h1 class="section"> Última Partida </h1>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-4">
+				<img src="{{ root }}/assets/img/teams/{{ last.casa.imagem_time }}.png" class="img-responsive center-block img-score">
+				<p class="team-info"> {{ last.casa.time }} </p>
+			</div>
+			<div class="col-xs-4 text-center">
+				<span class="score"> {{ last.casa.placar }} </span>
+				<span class="score"> {{ last.visitante.placar }} </span>
+				<p class="score-data"> 
+					{{ last.dados.campeonato }} <br/>
+					{{ last.dados.ano }}
+				</p>
+			</div>
+			<div class="col-xs-4">
+				<img src="{{ root }}/assets/img/teams/{{ last.visitante.imagem_time }}.png" class="img-responsive center-block img-score">
+				<p class="team-info"> {{ last.visitante.time }} </p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<table class="table table-striped text-center table-last-match">
+					<thead>
+						<tr>
+							<td><i class="text-primary fa fa-3x fa-soccer-ball-o"></i> </td>
+							<td><i class="text-primary fa-3x glyphicon glyphicon-fire"></i> </td>
+							<td><i class="text-primary fa fa-3x fa-warning"></i> </td>
+							<td><i class="text-primary fa fa-3x fa-ambulance"></i> </td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td> {{ last.dados.gol }} </td>
+							<td> {{ last.dados.assistencia }} </td>
+							<td> {{ last.dados.cartao_amarelo|raw }} </td>
+							<td> {{ last.dados.lesao|raw }} </td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-4 col-md-offset-4 overlay">
+				<p class="text-center" style="position: relative; top: -15px; left: -10px;"> 
+					Dentro Área <br/>
+					<strong> {{ last.dados.dentro_area }} </strong>
+				</p>
+				<p class="text-center" style="position: relative; left: -95px; top: 7px;"> 
+					Fora Área <br/>
+					<strong> {{ last.dados.fora_area }} </strong>
+				</p>
+				<p class="text-center" style="position: relative; left: -95px; top: 65px"> 
+					Falta <br/>
+					<strong> {{ last.dados.falta }} </strong>
+				</p>
+				<p class="text-center" style="position: relative; left: -20px; top: 105px"> 
+					Pênalti <br/>
+					<strong> {{ last.dados.penalti }} </strong>
+				</p>
+				<p class="text-center" style="position: relative; left: 190px; top: 30px"> 
+					Cabeça <br/>
+					<strong> {{ last.dados.cabeca }} </strong>
+				</p>
+				<p class="text-center" style="position: relative; left: 280px; top: -162px"> 
+					Cobertura <br/>
+					<strong> {{ last.dados.cobertura }} </strong>
+				</p>
+				<p class="text-center" style="position: relative; left: 280px; top: -371px"> 
+					Perna Ruim <br/>
+					<strong> {{ last.dados.perna_trocada }} </strong>
+				</p>
+				<p class="text-center" style="position: relative; left: 190px; top: -546px"> 
+					Voleio <br/>
+					<strong> {{ last.dados.voleio }} </strong>
+				</p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-4 col-md-offset-4">
+				<div class="visual-circle" style="border-color: {{ last.dados.participacao_class }}">
+					<span class="match-participacao" style="color: {{ last.dados.participacao_class }} "> {{ last.dados.participacao }}% </span>
+
+					<span class='data-category' style="background: {{ last.dados.participacao_class }}; top:-285px;left:26.5%;"></span>
+					<span class='data-category' style="background: {{ last.dados.participacao_class }}; top:-220px;left:2%;"></span>
+					<span class='data-category' style="background: {{ last.dados.participacao_class }}; top:-110px;left:2.75%;"></span>
+					<span class='data-category' style="background: {{ last.dados.participacao_class }}; top:-240px;left:95%;"></span>
+					<span class='data-category' style="background: {{ last.dados.participacao_class }}; top:-56px;left:26.5%;"></span>
+					<span class='data-category' style="background: {{ last.dados.participacao_class }}; top:-65.5px;left: 69.5%;"></span>
+					<span class='data-category' style="background: {{ last.dados.participacao_class }}; top:-345px;left:69.5%;"></span>
+					<span class='data-category' style="background: {{ last.dados.participacao_class }}; top:-160px;left:94.5%;"></span>
+				</div>
+			</div>
+		</div>
+		<br /><br /><br /><br />
+		<hr>
+	</div>
+	<br /><br />
+	<div class="container">
+		<div class="row">
+			<h1 class="section">Histórico</h1>
+			<canvas id="Historico" width="720" height="400" class="center-block"></canvas>
+			<span id="aproveitamento" style="color: {{ historico.maior }}">{{ historico.aproveitamento }}%</span>
+
+			<div class="last-5-results text-center">
+				<strong class="text-center" style="display: block; font-size: 12px; color: #555; letter-spacing: -0.25px;margin-bottom: 5px;"> Últimas Partidas </strong>
+				
+				{% for last_five in last_five_matches %}
+					<span class="result-ball" style="background: {{ last_five.class }}" title="{{ last_five.resultado }}" data-toggle="tooltip"></span>
+				{% endfor %}
+			</div>
+		</div>
+		<br /><br /><br /><br />
+		<div class="row">
+			<div class="col-md-12">	<hr> </div>
+		</div>
+	</div>
+{% endblock %}
+
+{% block styles %}
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript" src="{{ root }}/assets/js/chart.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {       
+	// tooltip
+	$('[data-toggle="tooltip"]').tooltip(); 
+
+	var width = $('.last-5-results').width();
+	$('.last-5-results').width(width).css("display", "block");
+
+    // Doughnut chart
+    var ctx = $("#Historico");
+    var myChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Vitórias', 'Empates', 'Derrotas'],
+            datasets: [
+            {
+                data: [
+                	{{ historico.vitorias }},
+                	{{ historico.empates }},
+                	{{ historico.derrotas }}
+                ],
+                backgroundColor: [
+                        "#4CAF50",
+                        "#B0BEC5",
+                        "#f44336"
+                    ],
+                    hoverBackgroundColor: [
+                        "#66BB6A",
+                        "#CFD8DC",
+                        "#ef5350"
+                    ]
+            }]
+        },
+        options: {
+            cutoutPercentage: 65,
+            circunference: 180,
+            animation: {
+                animateRotate: true
+            },
+            responsive: false,
+            title: {
+                display: true,
+                text: 'Histórico contra {{ historico.time }}'
+            }
+        }
+    });
+});
+</script>
+{% endblock %}
